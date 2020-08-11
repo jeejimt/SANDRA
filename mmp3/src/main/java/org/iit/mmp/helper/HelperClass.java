@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
-
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
@@ -39,44 +38,48 @@ public class HelperClass {
 		String destPath=System.getProperty("user.dir")+"/screenshots/"+tc_Name+Calendar.getInstance().getTimeInMillis()+".jpg";
 		File destFile=new File(destPath);
 		FileUtils.copyFile(srcFile, destFile);
-		
 		}
+		
 		//launching module
 		
 		public void launchModule(String url) {
 			driver.get(url);
-}
-		
-		//login
-		public void login(String username,String password) {
-			driver.findElement(By.id("username")).sendKeys(username);
-			driver.findElement(By.id("password")).sendKeys(password);;
-			driver.findElement(By.xpath("//input[@value='Sign In']")).click();
-		
-		
 		}
+	
 		//navigate to any module
-				public void navigateToModule(String moduleName) {
-					//waitMethod(By.xpath("//span[contains(text(),'"+moduleName+"')]"));
-					driver.findElement(By.xpath("//span[contains(text(),'"+moduleName+"')]")).click();		
+		public void navigateToAModule(String moduleName) {
+					
+			driver.findElement(By.xpath("//span[contains(text(),'"+moduleName+"')]")).click();		
 				}
+		public void login(String uName,String pWord) {
+						
+			driver.findElement(By.id("username")).sendKeys(uName);
+			driver.findElement(By.id("password")).sendKeys(pWord);
+			driver.findElement(By.name("submit")).click();
+		}
+		public void adminLogin(String uName,String pWord)  {
+				
+			driver.findElement(By.id("username")).sendKeys(uName);
+			driver.findElement(By.id("password")).sendKeys(uName);
+			driver.findElement(By.name("admin")).click();
+		}
 				//clicking buttons
-				public void  clickButtons(String textval){
+		public void  clickButtons(String textval) throws InterruptedException{
+			driver.findElement(By.xpath("//input[@value='"+textval+"']")).click();
 					
-					driver.findElement(By.xpath("//input[@value='"+textval+"']")).click();
-					
-				}	
+		}	
 				//to give appointment date
-				public String giveDate() {
-					
-					Select dateLB=new Select(driver.findElement(By.id("app_date")));
-					dateLB.selectByIndex(1);
-					String selectDate=driver.findElement(By.id("app_date")).getText();
-					return selectDate;
+		public String giveDate() {
+			waitMethod(By.id("app_date"));
+			Select dateLB=new Select(driver.findElement(By.id("app_date")));
+			dateLB.selectByIndex(1);
+			String selectDate=driver.findElement(By.id("app_date")).getText();
+			return selectDate;
 				}
-				/*public  void waitMethod(By locator) {
-					WebDriverWait w=new WebDriverWait(driver,5);
-					w.until(ExpectedConditions.visibilityOfElementLocated(locator));
-				}*/
+		//wait
+		public  void waitMethod(By locator) {
+					WebDriverWait w=new WebDriverWait(driver,15);
+					w.until(ExpectedConditions.visibilityOfElementLocated(locator));	
+		}
 }
 				

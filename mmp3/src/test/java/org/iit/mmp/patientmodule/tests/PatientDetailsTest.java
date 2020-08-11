@@ -1,10 +1,10 @@
 package org.iit.mmp.patientmodule.tests;
 
 import java.util.HashMap;
-import org.iit.mmp.adminmodule.pages.AdmPatientDetails;
-import org.iit.mmp.adminmodule.pages.AdminPatientsTabPage;
+import org.iit.mmp.adminmodule.pages.PatientDetailsAdmPage;
+import org.iit.mmp.adminmodule.pages.CreateReportVisitPrescFeesAdmPage;
 import org.iit.mmp.helper.HelperClass;
-import org.iit.mmp.patientmodule.pages.PatientDetailsPage;
+import org.iit.mmp.patientmodule.pages.PatientDetailsPatientPage;
 import org.iit.util.TestBase;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -15,18 +15,18 @@ public class PatientDetailsTest extends TestBase{
 	public static HashMap<String,String> hmapPat;
 	HelperClass helper;
 	public static String ssn;
-	PatientDetailsPage patientpage;
-	AdminPatientsTabPage admPaPage;
-	AdmPatientDetails  padepage;
+	PatientDetailsPatientPage patientpage;
+	CreateReportVisitPrescFeesAdmPage admPaPage;
+	PatientDetailsAdmPage  padepage;
 	
 	@Parameters({"patientUrl","patientUname","patientPword"})
 	@Test
 	public void profilePatientDetails(String patientUrl,String patientUname,String patientPword) throws InterruptedException {
-		patientpage=new PatientDetailsPage(driver);
+		patientpage=new PatientDetailsPatientPage(driver);
 		helper=new HelperClass(driver);
 		helper.launchModule(patientUrl);
 		helper.login(patientUname,patientPword);
-		helper.navigateToModule(" Profile ");
+		helper.navigateToAModule(" Profile ");
 		hmapPat= patientpage.personalDetails();
 		 ssn=hmapPat.get("patientSsn");
 	}
@@ -36,11 +36,11 @@ public class PatientDetailsTest extends TestBase{
 	public void adminPatientTab(String adminUrl,String adminUname,String adminPword,String DrName) throws InterruptedException {
 		
 		helper=new HelperClass(driver);
-		admPaPage=new AdminPatientsTabPage(driver);
-		padepage=new AdmPatientDetails(driver);
+		admPaPage=new CreateReportVisitPrescFeesAdmPage(driver);
+		padepage=new PatientDetailsAdmPage(driver);
 		helper.launchModule(adminUrl);
-		helper.login(adminUname,adminPword);
-		helper.navigateToModule("Patients ");
+		helper.adminLogin(adminUname,adminPword);
+		helper.navigateToAModule("Patients ");
 		admPaPage.searchBySSN(ssn);
 		hmapAdm=padepage.paDetailsAdm();
 	

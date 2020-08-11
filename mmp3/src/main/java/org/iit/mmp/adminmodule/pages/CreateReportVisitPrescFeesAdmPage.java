@@ -11,9 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class AdminPatientsTabPage {
-	
-
+public class CreateReportVisitPrescFeesAdmPage {
 	
 	By continueButton = By.id("ChangeHeatName");
 	By symptxtbox = By.name("sym");
@@ -31,25 +29,28 @@ public class AdminPatientsTabPage {
 	ScheduleAppointmentPage sap;
 	HashMap<String, String> hmap_visit,hmap_prescription,hmap_report;
 	
-	public AdminPatientsTabPage(WebDriver driver){
-	this.driver=driver;	
-	 helperObj=new  HelperClass(driver);
-	 driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
+	public CreateReportVisitPrescFeesAdmPage(WebDriver driver){
+	  this.driver=driver;	
+	  helperObj=new  HelperClass(driver);
+	 
 	}
+	 
 	public void searchBySSN(String ssnno) throws InterruptedException {
+		
 		driver.findElement(searchTB).sendKeys(ssnno);
-		driver.findElement(searchButton).click();
+		driver.findElement(searchButton).click();		
 		driver.findElement(nameLink).click();
+		Thread.sleep(1000);
 	}
 	
 	public HashMap<String, String> visitDetails(String DrName) throws InterruptedException {
 		ScheduleAppointmentPage sap=new ScheduleAppointmentPage(driver);
-		HashMap<String,String> hmap_visit=sap.bookAppointment(DrName);
+		HashMap<String,String> hmap_visit=sap.bookAnAppointment(DrName);
 		return hmap_visit;
 	}
 		
 	public HashMap<String,String> prescriptonDetails() throws InterruptedException {
-		 hmap_prescription=new HashMap<String,String>();
+		hmap_prescription=new HashMap<String,String>();
 		String medicine="ibuprofen";
 		String medicinedesc="take every 6 hrs";
 		String selectDate=helperObj.giveDate();
@@ -68,11 +69,11 @@ public class AdminPatientsTabPage {
 		Select ser=new Select(driver.findElement(By.id("service")));
 		ser.selectByIndex(1);		
 		driver.findElement(submitButton2).click();
-		Thread.sleep(1000);
 		driver.switchTo().alert().accept();
 		
 	}
 	public HashMap<String,String> reportDetails() throws InterruptedException {
+		 driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ; 
 		String reportname="X-Ray Report";
 		String reportdesc="chest x-ray";
 		HashMap<String, String> hmap_report=new HashMap<String,String>();
@@ -88,7 +89,5 @@ public class AdminPatientsTabPage {
 		hmap_report.put("reportDesc",reportdesc);
 		return hmap_report;
 	}
-	
-	
 			
 }

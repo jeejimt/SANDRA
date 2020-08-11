@@ -14,7 +14,7 @@
   
     <classes>
     
-     		<class name="org.iit.mmp.adminmodule.tests.AdminPatientsTabTest"/>
+     		<class name="org.iit.mmp.adminmodule.tests.ReportHistoryTest"/>
     </classes>
   
   </test>

@@ -27,7 +27,7 @@ HelperClass helperObj;
 	this.driver=driver;
 	helperObj=	 new HelperClass(driver);
 }
-	public HashMap<String,String> bookAppointment(String doctorName) throws InterruptedException {
+	public HashMap<String,String> bookAnAppointment(String doctorName) throws InterruptedException {
 		HashMap<String,String> hmap=new HashMap<String,String>();
 		AppLibrary lib=new AppLibrary();		
 		helperObj=	 new HelperClass(driver);

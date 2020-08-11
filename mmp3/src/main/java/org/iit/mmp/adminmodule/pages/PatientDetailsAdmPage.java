@@ -4,7 +4,7 @@ import org.iit.mmp.helper.HelperClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class AdmPatientDetails {
+public class PatientDetailsAdmPage {
 	
 	By admPaName=By.xpath("//td[contains(text(),'Patient Name')]");
 	By admPaSsn=By.xpath("//td[contains(text(),'SSN')]/following-sibling::td[1]");
@@ -14,7 +14,7 @@ public class AdmPatientDetails {
 	By admPaAddress=By.xpath("//td[contains(text(),'Address')]/following-sibling::td[1]");
 	WebDriver driver;
 	HelperClass helper;
-	public AdmPatientDetails(WebDriver driver){
+	public PatientDetailsAdmPage(WebDriver driver){
 		this.driver=driver;	
 		 helper=new  HelperClass(driver);
 		}

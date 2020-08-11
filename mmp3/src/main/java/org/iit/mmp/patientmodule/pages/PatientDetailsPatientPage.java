@@ -7,12 +7,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-public class PatientDetailsPage {
+public class PatientDetailsPatientPage {
 	
 	
 	WebDriver driver;
 	HelperClass helperObj;
-	public PatientDetailsPage(WebDriver driver){
+	public PatientDetailsPatientPage(WebDriver driver){
 		this.driver=driver;	
 		 helperObj=new  HelperClass(driver);
 		}
